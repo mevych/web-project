@@ -10,6 +10,7 @@ export const STRINGS = {
     langLabel: 'Язык',
     toLight: 'Светлая тема',
     toDark: 'Тёмная тема',
+    socials: 'Ссылки',
   },
   en: {
     name: 'Eraksin Matvey',
@@ -22,5 +23,6 @@ export const STRINGS = {
     langLabel: 'Language',
     toLight: 'Light theme',
     toDark: 'Dark theme',
+    socials: 'Links',
   },
 };

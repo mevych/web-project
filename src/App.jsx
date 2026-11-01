@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import AsciiBackground from './AsciiBackground';
 import Equalizer from './Equalizer';
+import Scramble from './Scramble';
 import { useAudio } from './useAudio';
 import { STRINGS } from './i18n';
-import { TRACK } from './config';
+import { TRACK, SOCIALS } from './config';
 import { load, save } from './storage';
 import './App.css';
 
@@ -74,7 +75,7 @@ export default function App() {
 
       <main className="hero">
         <h1 className="name" aria-label={t.name}>
-          {t.name}
+          <Scramble text={t.name} />
         </h1>
         <p className="role">{t.role}</p>
         <p className="about">{t.about}</p>
@@ -113,6 +114,21 @@ export default function App() {
           </p>
         )}
       </main>
+
+      <footer className="foot">
+        <ul className="socials" aria-label={t.socials}>
+          {SOCIALS.map((s) => (
+            <li key={s.id}>
+              <a
+                href={s.href}
+                {...(s.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </footer>
     </div>
   );
 }

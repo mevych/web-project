@@ -3,7 +3,7 @@
   isolation: isolate;
   min-height: 100svh;
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto 1fr auto;
   padding: clamp(1rem, 3vw, 2.25rem);
   text-shadow: 0 0 14px var(--bg), 0 0 3px var(--bg);
 }
@@ -90,7 +90,7 @@
   margin: 0;
   font-weight: 800;
   font-size: clamp(3.2rem, 12vw, 9.5rem);
-  line-height: 1.0;
+  line-height: 1.08;
   letter-spacing: -0.04em;
 }
 
@@ -189,6 +189,29 @@
 .error {
   margin: 1rem 0 0;
   font-size: 0.9rem;
+  color: var(--accent);
+}
+
+.socials {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+}
+
+.socials a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  transition: color 0.2s;
+}
+
+.socials a:hover {
   color: var(--accent);
 }
 
