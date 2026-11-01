@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import AsciiBackground from './AsciiBackground';
 import { STRINGS } from './i18n';
 import { load, save } from './storage';
 import './App.css';
@@ -16,6 +17,7 @@ const getInitialTheme = () => document.documentElement.dataset.theme || 'dark';
 export default function App() {
   const [lang, setLang] = useState(getInitialLang);
   const [theme, setTheme] = useState(getInitialTheme);
+  const levelsRef = useRef({ bass: 0, mid: 0, treble: 0, bins: new Uint8Array(128) });
   const t = STRINGS[lang];
 
   useEffect(() => {
@@ -30,6 +32,10 @@ export default function App() {
 
   return (
     <div className="page">
+      <AsciiBackground levelsRef={levelsRef} />
+      <div className="glow" aria-hidden="true" />
+      <div className="scrim" aria-hidden="true" />
+
       <header className="bar">
         <div className="seg" role="group" aria-label={t.langLabel}>
           {LANGS.map((code) => (
