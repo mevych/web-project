@@ -15,6 +15,14 @@
   --accent: #a99bff;
 }
 
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #eef0f6;
+  --ink: #181b3a;
+  --muted: #565b84;
+  --accent: #4636e8;
+}
+
 html,
 body {
   margin: 0;
