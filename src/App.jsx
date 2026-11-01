@@ -1,6 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import AsciiBackground from './AsciiBackground';
+import Equalizer from './Equalizer';
+import { useAudio } from './useAudio';
 import { STRINGS } from './i18n';
+import { TRACK } from './config';
 import { load, save } from './storage';
 import './App.css';
 
@@ -14,10 +17,21 @@ const getInitialLang = () => {
 
 const getInitialTheme = () => document.documentElement.dataset.theme || 'dark';
 
+const PlayIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+    <path d="M3 1.5v13l11-6.5z" fill="currentColor" />
+  </svg>
+);
+const PauseIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+    <path d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z" fill="currentColor" />
+  </svg>
+);
+
 export default function App() {
   const [lang, setLang] = useState(getInitialLang);
   const [theme, setTheme] = useState(getInitialTheme);
-  const levelsRef = useRef({ bass: 0, mid: 0, treble: 0, bins: new Uint8Array(128) });
+  const { levelsRef, playing, error, toggle } = useAudio(TRACK.src);
   const t = STRINGS[lang];
 
   useEffect(() => {
@@ -64,6 +78,25 @@ export default function App() {
         </h1>
         <p className="role">{t.role}</p>
         <p className="about">{t.about}</p>
+
+        <div className="player">
+          <button type="button" className="play" onClick={toggle} aria-pressed={playing}>
+            {playing ? <PauseIcon /> : <PlayIcon />}
+            <span>{playing ? t.pause : t.play}</span>
+          </button>
+          <p className="track">
+            <span className="track-title">{TRACK.title}</span>
+            <span className="track-artist">{TRACK.artist}</span>
+          </p>
+        </div>
+        <div className="eq" aria-hidden="true">
+          <Equalizer levelsRef={levelsRef} />
+        </div>
+        {error && (
+          <p className="error" role="alert">
+            {t.trackError}
+          </p>
+        )}
       </main>
     </div>
   );
