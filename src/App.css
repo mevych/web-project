@@ -154,6 +154,27 @@
   color: var(--muted);
 }
 
+.volume {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.volume input {
+  width: 7rem;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .eq {
   margin-top: 1.1rem;
   font-family: var(--font-mono);
@@ -180,6 +201,12 @@
 @media (max-width: 560px) {
   .hero {
     padding-block: 1rem;
+  }
+  .volume {
+    width: 100%;
+  }
+  .volume input {
+    flex: 1;
   }
   .play {
     width: 100%;

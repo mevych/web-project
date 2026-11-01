@@ -31,7 +31,7 @@ const PauseIcon = () => (
 export default function App() {
   const [lang, setLang] = useState(getInitialLang);
   const [theme, setTheme] = useState(getInitialTheme);
-  const { levelsRef, playing, error, toggle } = useAudio(TRACK.src);
+  const { levelsRef, playing, error, toggle, volume, setVolume } = useAudio(TRACK.src);
   const t = STRINGS[lang];
 
   useEffect(() => {
@@ -88,6 +88,21 @@ export default function App() {
             <span className="track-title">{TRACK.title}</span>
             <span className="track-artist">{TRACK.artist}</span>
           </p>
+          <label className="volume">
+            <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M2 6h3l4-3.5v11L5 10H2z" fill="currentColor" />
+              <path d="M11.5 5.5a3.5 3.5 0 0 1 0 5" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+            </svg>
+            <span className="visually-hidden">{t.volume}</span>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={(e) => setVolume(Number(e.target.value))}
+            />
+          </label>
         </div>
         <div className="eq" aria-hidden="true">
           <Equalizer levelsRef={levelsRef} />
